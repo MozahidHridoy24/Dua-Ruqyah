@@ -21,7 +21,6 @@ export default function DuaCardList({ subcatId }) {
       {duas.map((dua) => (
         <DuaCard
           key={dua.dua_id}
-          id={dua.dua_id}
           title={dua.dua_name_en}
           content={dua.top_en}
           reference={dua.refference_en}

@@ -64,7 +64,7 @@ export default function Sidebar({ onCategorySelect, onSubcatSelect }) {
             <button
               className={`font-semibold text-left w-full ${
                 selectedCategory === cat.cat_id
-                  ? "text-[#219EBC]"
+                  ? "text-[#588157]"
                   : "text-gray-800"
               }`}
               onClick={() => handleCategoryClick(cat.cat_id, cat.cat_name_en)}
@@ -77,7 +77,7 @@ export default function Sidebar({ onCategorySelect, onSubcatSelect }) {
                 {subcategories.map((sub) => (
                   <li key={sub.subcat_id}>
                     <button
-                      className="hover:text-[#219EBC] transition"
+                      className="hover:text-[#588157] transition"
                       onClick={() =>
                         handleSubcatClick(sub.subcat_id, sub.subcat_name_en)
                       }

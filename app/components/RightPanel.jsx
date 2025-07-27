@@ -4,7 +4,7 @@ export default function RightPanel() {
       <h2 className="text-lg font-semibold mb-6">Language Settings</h2>
       <ul className="space-y-4 text-sm">
         <li className="text-gray-700">
-          Selected Language: <span className="text-[#219EBC]">English</span>
+          Selected Language: <span className="text-[#588157]">English</span>
         </li>
         <li className="text-gray-600">Font Setting</li>
         <li className="text-gray-600">View Setting</li>

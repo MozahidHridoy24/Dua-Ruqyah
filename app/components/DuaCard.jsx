@@ -1,7 +1,6 @@
 import DuaCardFooter from "./DuaCardFooter";
 
 export default function DuaCard({
-  id,
   title,
   content,
   reference,
@@ -12,7 +11,7 @@ export default function DuaCard({
 }) {
   return (
     <div className="border border-gray-200 bg-white p-6 rounded-xl shadow-sm mb-6">
-      <h3 className="text-[#219EBC] font-bold text-lg mb-2">{title}</h3>
+      <h3 className="text-[#588157] font-bold text-lg mb-2">{title}</h3>
       <p className="text-gray-800">{content}</p>
 
       {/* Arabic Text */}
@@ -32,7 +31,7 @@ export default function DuaCard({
 
       {/* Icons - UI only */}
       <div className="flex items-end justify-end gap-4 mt-4 text-[#9CA3AF] text-xl">
-        <DuaCardFooter duaId={id} audioSrc={audio} />
+        <DuaCardFooter  audioSrc={audio} />
       </div>
     </div>
   );
