@@ -1,44 +1,74 @@
-import Sidebar from "../app/components/sidebar";
-import RightPanel from "../app/components/rightpanel";
-import DuaCard from "../app/components/duacard";
+"use client";
+import { useState } from "react";
+import Sidebar from "@/app/components/Sidebar";
+import DuaCardList from "@/app/components/DuaCardList";
 
-export default function Home() {
+export default function HomePage() {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategoryName, setSelectedCategoryName] = useState("");
+  const [selectedSubcat, setSelectedSubcat] = useState(null);
+  const [selectedSubcatName, setSelectedSubcatName] = useState("");
+
+  const handleCategorySelect = (catId, catName) => {
+    setSelectedCategory(catId);
+    setSelectedCategoryName(catName || "");
+    setSelectedSubcat(null); // reset subcat when changing category
+    setSelectedSubcatName("");
+  };
+
+  const handleSubcatSelect = (subcatId, subcatName) => {
+    setSelectedSubcat(subcatId);
+    setSelectedSubcatName(subcatName || "");
+  };
+
   return (
     <div className="flex bg-gray-50 text-gray-800">
-      <Sidebar />
-
+      <Sidebar
+        onCategorySelect={handleCategorySelect}
+        onSubcatSelect={handleSubcatSelect}
+      />
       <main className="flex-1 p-6 max-w-3xl mx-auto">
         {/* Breadcrumb */}
-        <div className="text-sm text-gray-500 mb-2">
-          Home &gt; Categories of Dua &gt;{" "}
-          <span className="text-blue-700">Dua's Importance</span>
+        <div className="mb-6 space-y-2 text-sm text-[#588157]">
+          {/* Breadcrumb */}
+          <div className="text-sm text-[#588157]">
+            <span className="font-medium text-[#588157]">Home</span>
+            {selectedCategoryName && (
+              <>
+                {" "}
+                &gt;{" "}
+                <span className="text-[#588157]">{selectedCategoryName}</span>
+              </>
+            )}
+            {selectedSubcatName && (
+              <>
+                {" "}
+                &gt;{" "}
+                <span className="text-[#588157] font-medium">
+                  {selectedSubcatName}
+                </span>
+              </>
+            )}
+          </div>
+
+          {/* Category & Section display */}
+          {selectedCategoryName && (
+            <p>
+              <span className="font-semibold text-[#588157]">Category:</span>{" "}
+              {selectedCategoryName}
+            </p>
+          )}
+          {selectedSubcatName && (
+            <p>
+              <span className="font-semibold text-[#588157]">Section:</span>{" "}
+              {selectedSubcatName}
+            </p>
+          )}
         </div>
 
-        {/* Titles */}
-        <h2 className="text-gray-800 font-bold text-xl mb-2">
-          Category: Dua's Importance
-        </h2>
-        <h3 className="text-gray-600 mb-6">
-          Section: The servant is dependent on his Lord
-        </h3>
-
-        {/* Dua Cards */}
-        <DuaCard
-          title="01. We Are in Need of Allah’s Help (Surah Al-Fatir)"
-          content="All human beings depend on Allah for their welfare and prevention of evil in various matters of their religion and world..."
-          reference="Surah Al-Fatir 35:15"
-          arabic="يَا أَيُّهَا النَّاسُ أَنتُمُ الْفُقَرَاءُ إِلَى اللَّهِ..."
-        />
-
-        <DuaCard
-          title="02. Dua After Prayer for Rizq and Help"
-          content="The Prophet ﷺ used to say after every compulsory prayer... treasure of all things is in the hands of Allah..."
-          reference="Surah Al-Hijr 15:21"
-          arabic="اللَّهُمَّ لاَ مَانِعَ لِمَا أَعْطَيْتَ، وَلاَ مُعْطِيَ لِمَا مَنَعْتَ..."
-        />
+        {/* Dua List */}
+        <DuaCardList subcatId={selectedSubcat} />
       </main>
-
-      <RightPanel />
     </div>
   );
 }
