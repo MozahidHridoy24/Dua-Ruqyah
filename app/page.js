@@ -2,6 +2,8 @@
 import { useState } from "react";
 import Sidebar from "@/app/components/Sidebar";
 import DuaCardList from "@/app/components/DuaCardList";
+import RightPanel from "@/app/components/RightPanel";
+import Topbar from "./components/Topbar";
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -22,53 +24,60 @@ export default function HomePage() {
   };
 
   return (
-    <div className="flex bg-gray-50 text-gray-800">
-      <Sidebar
-        onCategorySelect={handleCategorySelect}
-        onSubcatSelect={handleSubcatSelect}
-      />
-      <main className="flex-1 p-6 max-w-3xl mx-auto">
-        {/* Breadcrumb */}
-        <div className="mb-6 space-y-2 text-sm text-[#588157]">
+    <div>
+      <Topbar></Topbar>
+      <div className="flex bg-gray-50 text-gray-800">
+        <Sidebar
+          onCategorySelect={handleCategorySelect}
+          onSubcatSelect={handleSubcatSelect}
+        />
+        <main className="flex-1 p-6 max-w-3xl mx-auto">
           {/* Breadcrumb */}
-          <div className="text-sm text-[#588157]">
-            <span className="font-medium text-[#588157]">Home</span>
+          <div className="mb-6 space-y-2 text-sm text-[#588157]">
+            {/* Breadcrumb */}
+            <div className="text-sm text-[#588157]">
+              <span className="font-medium text-[#588157]">Home</span>
+              {selectedCategoryName && (
+                <>
+                  {" "}
+                  &gt;{" "}
+                  <span className="text-[#588157]">{selectedCategoryName}</span>
+                </>
+              )}
+              {selectedSubcatName && (
+                <>
+                  {" "}
+                  &gt;{" "}
+                  <span className="text-[#588157] font-medium">
+                    {selectedSubcatName}
+                  </span>
+                </>
+              )}
+            </div>
+
+            {/* Category & Section display */}
             {selectedCategoryName && (
-              <>
-                {" "}
-                &gt;{" "}
-                <span className="text-[#588157]">{selectedCategoryName}</span>
-              </>
+              <p>
+                <span className="font-semibold text-[#588157]">Category:</span>{" "}
+                {selectedCategoryName}
+              </p>
             )}
             {selectedSubcatName && (
-              <>
-                {" "}
-                &gt;{" "}
-                <span className="text-[#588157] font-medium">
-                  {selectedSubcatName}
-                </span>
-              </>
+              <p>
+                <span className="font-semibold text-[#588157]">Section:</span>{" "}
+                {selectedSubcatName}
+              </p>
             )}
           </div>
 
-          {/* Category & Section display */}
-          {selectedCategoryName && (
-            <p>
-              <span className="font-semibold text-[#588157]">Category:</span>{" "}
-              {selectedCategoryName}
-            </p>
-          )}
-          {selectedSubcatName && (
-            <p>
-              <span className="font-semibold text-[#588157]">Section:</span>{" "}
-              {selectedSubcatName}
-            </p>
-          )}
+          {/* Dua List */}
+          <DuaCardList subcatId={selectedSubcat} />
+        </main>
+        {/* Right Panel */}
+        <div className="w-72 border-l border-gray-200 p-4 hidden lg:block">
+          <RightPanel />
         </div>
-
-        {/* Dua List */}
-        <DuaCardList subcatId={selectedSubcat} />
-      </main>
+      </div>
     </div>
   );
 }
